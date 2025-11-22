@@ -64,15 +64,16 @@
 </head>
 <body>
   <div class="stage">
-    <div class="img-layer" id="image_default" style="background-image:url('im/default.jpg'); opacity:1;"></div>
+    <div class="img-layer" id="image_bkg" style="background-image:url('im/default.jpg')"></div>
     <div class="emotion-label" id="emotionLabel"></div>
     <div class="columns" id="columns"></div>
   </div>
 
   <script>
     const columnsData = [
-      ["angry", "surprised", "sad"],
-      ["very_happy", "happy", "shy", "trance"]
+      ["angry", "warned", "sad"],
+      ["surprised", "default", "trance"],
+      ["very_happy", "happy", "shy", "sleepy"]
     ];
 
     const flatNames = columnsData.flat();
@@ -85,7 +86,7 @@
     let previous;
 
     function createImages() {
-      let prev = $("#image_default");
+      let prev = $("#image_bkg");
       flatNames.forEach(name => {
         prev = $("<div>")
           .addClass("img-layer")
@@ -122,7 +123,7 @@
 
           const release = () => {
             pressed = false;
-            show();
+            show('default');
           };
 
           cell.on('pointerdown touchstart', press);
@@ -136,7 +137,7 @@
 
       $(window).on('pointerup pointercancel touchend touchcancel', () => {
         pressed = false;
-        show();
+        show('default');
       });
     }
 
@@ -156,6 +157,7 @@
 
     createImages();
     buildColumns();
+    show('default');
   </script>
 </body>
 </html>
